@@ -12,7 +12,6 @@ export interface planetAnalyzationRequest {
 
 export interface planetAnalyzationResponse {
     name: string,
-    accuracy:  number,
-    disease: Array<{"name": string, "type": "초기" | "중기" | "말기"}>,
+    disease: Array<{"name": string, "type": "light" | "warning" | "danger"}>,
     information: {[key: string]: string}
 }

@@ -2,14 +2,50 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonIcon,
 import { airplane, medkit, medkitOutline } from "ionicons/icons";
 import { planetAnalyzationResponse } from "../../../data/apiStandard";
 
+interface PlanetHealthStatus {
+    status: "normal" | "light" | "warning" | "danger";
+}
+
 const Page: React.FC = () => {
 
-    const demoDate: planetAnalyzationResponse = {
+    const demoData: planetAnalyzationResponse = {
         name: "바질",
-        accuracy:  0.99,
-        disease: [{"name": "string", "type": "초기"}],
+        disease: [{"name": "string", "type": "light"}],
         information: {"toxicity": "무독성", "invasive": "침입성으로 보고되지 않음", "type": "허브", "life": "다년생", "cultivation": "가을, 봄"}
     };
+
+    function getPlanetHealthStatus(analyzation: planetAnalyzationResponse): PlanetHealthStatus {
+        let status: "normal" | "light" | "warning" | "danger" = "normal";
+
+        let light = 0;
+        let warning = 0;
+        let danger = 0;
+        analyzation.disease.forEach((disease) => {
+            switch (disease.type) {
+                case "light":
+                    light++;
+                    break;
+                case "warning":
+                    warning++;
+                    break;
+                case "danger":
+                    danger++;
+                    break;
+            }
+        });
+        if (danger > 0) {
+            status = "danger";
+        }
+        else if (warning > 0) {
+            status = "warning";
+        }
+        else if (light > 0) {
+            status = "light";
+        }
+
+        return { status: status };
+    }
+    const planetHealthStatus: PlanetHealthStatus = getPlanetHealthStatus(demoData);
 
     return (
         <IonPage>
@@ -34,8 +70,13 @@ const Page: React.FC = () => {
 
                 <IonList inset={true}>
                     <IonItem lines="none">
-                        <IonIcon color="danger" slot="start" icon={medkit} size="large"></IonIcon>
-                        <IonLabel><strong>식물 건강</strong></IonLabel>
+                        <IonIcon color={
+                            (planetHealthStatus.status === "normal") ? "success" :
+                            (planetHealthStatus.status === "light") ? "warning" :
+                            (planetHealthStatus.status === "warning") ? "warning" :
+                            (planetHealthStatus.status === "danger") ? "danger" : "success"
+                        } slot="start" icon={medkit} size="large"></IonIcon>
+                        <IonLabel><strong>건강 상태</strong></IonLabel>
                         {/* <IonNote slot="end">6</IonNote> */}
                     </IonItem>
                     <IonItem>
