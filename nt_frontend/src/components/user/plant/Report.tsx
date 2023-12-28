@@ -52,7 +52,10 @@ const PlantReportComponent: React.FC<ContainerProps> = ({plantAnalyzationData, p
         </div>
 
         <IonCard>
-            <img src={plantImageSrc} />
+            <img src={plantImageSrc} style={{
+                height: "auto",
+                maxHeight: "256px"
+            }} />
             <IonCardHeader>
                 <IonCardTitle>{plantAnalyzationData.name}</IonCardTitle>
             </IonCardHeader>

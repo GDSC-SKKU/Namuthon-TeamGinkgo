@@ -11,7 +11,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { cloudUpload, ellipse, home, person, square, triangle } from 'ionicons/icons';
+import { cloudUpload, ellipse, home, person, square, time, triangle } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -48,7 +48,7 @@ import Tab3 from './pages/Tab3';
 import GuestWelcomePage from './pages/guest/Welcome';
 import GuestAuthentication from './pages/guest/Authentication';
 import UserAccountPage from './pages/user/Account';
-
+import UserHistoryPage from './pages/user/History';
 import UserPlantUploadPage from './pages/user/PlantUpload';
 
 setupIonicReact();
@@ -88,8 +88,8 @@ const App: React.FC = () => {
               <Route exact path={pageDestinations.user.upload}>
                 <UserPlantUploadPage />
               </Route>
-              <Route path="/tab3">
-                <Tab3 />
+              <Route exact path={pageDestinations.user.history}>
+                <UserHistoryPage />
               </Route>
               <Route path={pageDestinations.user.account} exact={true}>
                 <UserAccountPage />
@@ -107,6 +107,10 @@ const App: React.FC = () => {
               <IonTabButton tab="upload" href={pageDestinations.user.upload}>
                 <IonIcon aria-hidden="true" icon={cloudUpload} />
                 <IonLabel>Upload</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="history" href={pageDestinations.user.history}>
+                <IonIcon aria-hidden="true" icon={time} />
+                <IonLabel>History</IonLabel>
               </IonTabButton>
               <IonTabButton tab="account" href={pageDestinations.user.account}>
                 <IonIcon aria-hidden="true" icon={person} />
