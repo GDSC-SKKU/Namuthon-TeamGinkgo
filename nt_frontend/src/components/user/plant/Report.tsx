@@ -48,18 +48,16 @@ const PlantReportComponent: React.FC<ContainerProps> = ({plantAnalyzationData, p
 
     return (<>
         <div style={{textAlign: "right", marginRight: "12px", marginTop: "12px"}}>
-            <IonText color="medium">Accuracy: { (plantAnalyzationData.accuracy * 100).toFixed(2) }%</IonText>
+            <IonText color="medium">{plantAnalyzationData.name} (Accuracy: { (plantAnalyzationData.accuracy * 100).toFixed(2) }%)</IonText>
         </div>
 
-        <IonCard>
-            <img src={plantImageSrc} style={{
-                height: "auto",
-                maxHeight: "256px"
-            }} />
-            <IonCardHeader>
-                <IonCardTitle>{plantAnalyzationData.name}</IonCardTitle>
-            </IonCardHeader>
-        </IonCard>
+        <div style={{
+            backgroundImage: `url(${plantImageSrc})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            height: "256px"
+        }}></div>
+
         <IonList inset={true}>
             <IonItem lines="none">
                 <IonIcon color={
