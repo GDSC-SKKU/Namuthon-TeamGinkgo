@@ -21,6 +21,7 @@ const Page: React.FC<ContainerProps> = ({}) => {
 
     function onImageUpload(file: File) {
         setImageUpload(file);
+        requestPlantAnalyzation(file);
     }
 
     function requestPlantAnalyzation(file: File) {

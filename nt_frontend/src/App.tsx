@@ -49,8 +49,7 @@ import GuestWelcomePage from './pages/guest/Welcome';
 import GuestAuthentication from './pages/guest/Authentication';
 import UserAccountPage from './pages/user/Account';
 
-import PlantUpload from './pages/user/item/PlantUpload';
-import PlantReport from './pages/user/item/PlantReport';
+import UserPlantUploadPage from './pages/user/PlantUpload';
 
 setupIonicReact();
 
@@ -87,7 +86,7 @@ const App: React.FC = () => {
                 <Tab1 />
               </Route>
               <Route exact path="/tab2">
-                <PlantUpload />
+                <UserPlantUploadPage />
               </Route>
               <Route path="/tab3">
                 <Tab3 />

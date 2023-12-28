@@ -1,5 +1,7 @@
+import { defaultBackendUrl } from "./config";
+
 function getApiUrl(path: string) {
-    const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || defaultBackendUrl;
     return `${backendUrl}${path}`;
 }
 
