@@ -1,6 +1,6 @@
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonIcon, IonItem, IonLabel, IonNote, IonSegment, IonSegmentButton } from "@ionic/react";
 import { airplane, medkit, medkitOutline } from "ionicons/icons";
-import { planetAnalyzationResponse } from "../../../data/apiStandard";
+import { PlanetAnalyzationResponse } from "../../../data/apiStandard";
 
 interface PlanetHealthStatus {
     status: "normal" | "light" | "warning" | "danger";
@@ -8,13 +8,13 @@ interface PlanetHealthStatus {
 
 const Page: React.FC = () => {
 
-    const demoData: planetAnalyzationResponse = {
+    const demoData: PlanetAnalyzationResponse = {
         name: "바질",
         disease: [{"name": "string", "type": "light"}],
         information: {"toxicity": "무독성", "invasive": "침입성으로 보고되지 않음", "type": "허브", "life": "다년생", "cultivation": "가을, 봄"}
     };
 
-    function getPlanetHealthStatus(analyzation: planetAnalyzationResponse): PlanetHealthStatus {
+    function getPlanetHealthStatus(analyzation: PlanetAnalyzationResponse): PlanetHealthStatus {
         let status: "normal" | "light" | "warning" | "danger" = "normal";
 
         let light = 0;
