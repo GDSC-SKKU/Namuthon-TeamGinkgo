@@ -11,7 +11,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { ellipse, person, square, triangle } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,12 +33,12 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 /* React feature import */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /* Firebase setup */
 import { firebaseConfig } from './data/config';
 import { initializeApp } from "firebase/app";
-import { getAuth, setPersistence, browserSessionPersistence, signInWithCredential } from "firebase/auth";
+import { getAuth, setPersistence, browserSessionPersistence, signInWithCredential, signOut } from "firebase/auth";
 
 /* Pages import */
 import pageDestinations from './data/pageDestinations';
@@ -47,23 +47,27 @@ import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import GuestWelcomePage from './pages/guest/Welcome';
 import GuestAuthentication from './pages/guest/Authentication';
-
-const app = initializeApp(firebaseConfig);
-const firebaseAuth = getAuth();
+import UserAccountPage from './pages/user/Account';
+import PlantReport from './pages/user/item/PlantReport';
 
 setupIonicReact();
 
 
 const App: React.FC = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const app = initializeApp(firebaseConfig);
+  const firebaseAuth = getAuth();
+
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
   setPersistence(firebaseAuth, browserSessionPersistence);
-  firebaseAuth.onAuthStateChanged((user) => {
-    if (user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  });
+  useEffect(() => {
+    firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
+    });
+  }, []);
 
   function isLoggedIn(): boolean {
     return firebaseAuth.currentUser ? true : false;
@@ -81,13 +85,13 @@ const App: React.FC = () => {
                 <Tab1 />
               </Route>
               <Route exact path="/tab2">
-                <Tab2 />
+                <PlantReport />
               </Route>
               <Route path="/tab3">
                 <Tab3 />
               </Route>
-              <Route path={pageDestinations.guest.login} exact={true}>
-                <GuestAuthentication firebaseAuth={firebaseAuth} section="login" />
+              <Route path={pageDestinations.user.account} exact={true}>
+                <UserAccountPage />
               </Route>
               <Route exact path="/">
                 <Redirect to={pageDestinations.user.dashboard} />
@@ -107,9 +111,9 @@ const App: React.FC = () => {
                 <IonIcon aria-hidden="true" icon={square} />
                 <IonLabel>Tab 3</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="logout" href={pageDestinations.guest.login}>
-                <IonIcon aria-hidden="true" icon={square} />
-                <IonLabel>Log Out</IonLabel>
+              <IonTabButton tab="account" href={pageDestinations.user.account}>
+                <IonIcon aria-hidden="true" icon={person} />
+                <IonLabel>Account</IonLabel>
               </IonTabButton>
             </IonTabBar>
 
@@ -124,10 +128,10 @@ const App: React.FC = () => {
                 <GuestWelcomePage />
               </Route>
               <Route path={pageDestinations.guest.login} exact={true}>
-                <GuestAuthentication firebaseAuth={firebaseAuth} section="login" />
+                <GuestAuthentication section="login" />
               </Route>
               <Route path={pageDestinations.guest.register} exact={true}>
-                <GuestAuthentication firebaseAuth={firebaseAuth} section="register" />
+                <GuestAuthentication section="register" />
               </Route>
             </IonRouterOutlet>
           </IonSplitPane>

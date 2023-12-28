@@ -6,7 +6,7 @@ const pageDestinations = {
     },
     user: {
         dashboard: '/u/dashboard',
-        upload: '/u/upload',
+        account: '/u/account'
     },
 };
 

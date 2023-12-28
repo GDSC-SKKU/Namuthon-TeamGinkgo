@@ -1,4 +1,4 @@
-import { IonList, IonItem, IonInput, IonButton } from "@ionic/react";
+import { IonList, IonItem, IonInput, IonButton, useIonRouter } from "@ionic/react";
 import { useState } from "react";
 import pageDestinations from "../../data/pageDestinations";
 
@@ -14,6 +14,8 @@ export const Login: React.FC<LoginContainerProps> = ({doLogin}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const router = useIonRouter();
+
     return (<>
         <h1>Welcome back!</h1>
         <IonList style={{margin: "24px 4px"}}>
@@ -25,7 +27,7 @@ export const Login: React.FC<LoginContainerProps> = ({doLogin}) => {
             </IonItem>
         </IonList>
         <IonButton expand="block" onClick={() => {doLogin(email, password)}}>Log In</IonButton>
-        <p>Need to create an account? <a href={pageDestinations.guest.register}>Register Now</a></p>
+        <p>Need to create an account? <a href="javascript:void(0)" onClick={() => {router.push(pageDestinations.guest.register)}}>Register Now</a></p>
     </>)
 };
 
@@ -33,6 +35,8 @@ export const Register: React.FC<RegisterContainerProps> = ({doRegister}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
+    const router = useIonRouter();
 
     return (<>
         <h1>Create your account</h1>
@@ -48,6 +52,6 @@ export const Register: React.FC<RegisterContainerProps> = ({doRegister}) => {
             </IonItem>
         </IonList>
         <IonButton expand="block" onClick={() => {doRegister(email, password, passwordConfirmation)}}>Register</IonButton>
-        <p>Already have an account? <a href="/auth/login">Login</a></p>
+        <p>Already have an account? <a href="javascript:void(0)" onClick={() => {router.push(pageDestinations.guest.login)}}>Login</a></p>
     </>)
 };

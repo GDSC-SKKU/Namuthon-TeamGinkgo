@@ -46,10 +46,10 @@ const Page: React.FC<ContainerProps> = ({}) => {
             >
                 <SwiperSlide>
                     <section>
-                        {/* <SlideImage src={interfaceIcons.auth.common} /> */}
+                        <SlideImage src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK55Rxdrg6kRg7vAonFRCZtg7iSs78AYgYPdk9K6JgmQ&s"} />
                         <h1>Welcome!</h1>
                         <IonText color="medium">
-                            <p>A project by </p>
+                            <p>A project by 은행나무</p>
                         </IonText>
                     </section>
                 </SwiperSlide>
@@ -58,7 +58,7 @@ const Page: React.FC<ContainerProps> = ({}) => {
             </Swiper>
             <div style={commonSlideElementStyle}>
                 <IonButton expand="block" size="large" onClick={() => {router.push(pageDestinations.guest.register)}}>Get Started</IonButton>
-                <p style={{margin: "8px"}}><small>Already have an account? <a href={pageDestinations.guest.login}>Login</a></small></p>
+                <p style={{margin: "8px"}}><small>Already have an account? <a href="javascript:void(0)" onClick={() => {router.push(pageDestinations.guest.login)}}>Login</a></small></p>
             </div>
         </IonContent>
     </IonPage>)
