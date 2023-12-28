@@ -1,4 +1,5 @@
 from django.http import HttpResponse, JsonResponse
+from pymongo.mongo_client import MongoClient
 
 import numpy as np
 import pandas as pd
@@ -14,6 +15,8 @@ from torch.utils.data import Dataset
 import torch.nn.functional as F
 import base64
 from gh_backend.base_dir import BASE_DIR
+import warnings
+warnings.filterwarnings("ignore")
 
 MODEL_PATH = os.path.join(BASE_DIR, 'gh_backend', 'model', 'best_model.pt')
 
@@ -49,7 +52,6 @@ def Return_Disease_Function(base64_input):
     input = base64.b64decode(base64_input)
     nparr = np.frombuffer(input, np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    print(img)
     img = cv2.resize(img, dsize=(256, 256), interpolation=cv2.INTER_AREA)
     img = img.astype(np.float32) / 255
     img = np.transpose(img, (2, 0, 1))
@@ -72,14 +74,43 @@ def Return_Disease_Function(base64_input):
         risk_name = risk[detection[2]]
     return max_prob, name, disease_name, risk_name
 
+def get_plantdata_from_database(name, disease_name):
+    uri = "mongodb+srv://skku:skku@namuthon-teamginkgo.ql5nn2f.mongodb.net/?retryWrites=true&w=majority"
+    # Create a new client and connect to the server
+    client = MongoClient(uri)
+
+    try:
+        client.admin.command('ping')
+        # Directly use the collection object말
+        collection = client.static.plantdata
+        # Use the find_one method to search for a document that matches the given criteria
+        query = {"이름": name, "병명": disease_name}
+        result = collection.find_one(query)
+        print(result)
+        if result:
+            
+            return {
+                        "초기 병징": result['병징']['초기'],
+                        "중기 병징": result['병징']['중기'],
+                        "말기 병징": result['병징']['말기'],
+                        "해결 방안": result['해결방안']
+                    }
+
+        else:
+            return None
+    
+    except Exception as e:
+        print(e)
+
 def gh_call(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     accuracy, name, disease_name, risk_name = Return_Disease_Function(body["base64Image"])
-    print(accuracy, name, disease_name, risk_name)
+    information = get_plantdata_from_database(name, disease_name)
+
     return JsonResponse({
         'name': name,
         'accuracy': accuracy,
         'disease': [{"name": disease_name, "type": risk_name}],
-        'information': []
+        'information': information
     })
