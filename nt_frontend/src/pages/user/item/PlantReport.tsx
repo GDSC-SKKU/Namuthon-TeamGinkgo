@@ -13,16 +13,6 @@ interface ContainerProps {
 
 const Page: React.FC<ContainerProps> = ({plantAnalyzationData, plantImageSrc}) => {
 
-    // const demoData: PlanetAnalyzationResponse = {
-    //     name: "바질",
-    //     accuracy: 0.9,
-    //     disease: [{"name": "딸기잿빛곰팡이병", "type": "light"}],
-    //     information: {"toxicity": "무독성", "invasive": "침입성으로 보고되지 않음", "type": "허브", "life": "다년생", "cultivation": "가을, 봄"}
-    // };
-
-    //const planetImageSrc: string = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK55Rxdrg6kRg7vAonFRCZtg7iSs78AYgYPdk9K6JgmQ&s";
-    //const planetAnalyzationData: PlanetAnalyzationResponse = demoData;
-
     function getPlanetHealthStatus(analyzation: PlanetAnalyzationResponse): PlanetHealthStatus {
         let status: "normal" | "light" | "warning" | "danger" = "normal";
 

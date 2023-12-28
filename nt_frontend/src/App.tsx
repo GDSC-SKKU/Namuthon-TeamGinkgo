@@ -48,6 +48,8 @@ import Tab3 from './pages/Tab3';
 import GuestWelcomePage from './pages/guest/Welcome';
 import GuestAuthentication from './pages/guest/Authentication';
 import UserAccountPage from './pages/user/Account';
+
+import PlantUpload from './pages/user/item/PlantUpload';
 import PlantReport from './pages/user/item/PlantReport';
 
 setupIonicReact();
@@ -85,7 +87,7 @@ const App: React.FC = () => {
                 <Tab1 />
               </Route>
               <Route exact path="/tab2">
-                <PlantReport />
+                <PlantUpload />
               </Route>
               <Route path="/tab3">
                 <Tab3 />
