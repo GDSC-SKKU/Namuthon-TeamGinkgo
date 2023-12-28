@@ -3,6 +3,7 @@ import { useState } from "react";
 import PlantUploadComponent from "../../components/user/plant/Upload";
 import PlantReportComponent from "../../components/user/plant/Report";
 import { PlanetAnalyzationRequest, PlanetAnalyzationResponse, backendUrl } from "../../data/apiStandard";
+import { FullScreenLoadingComponent } from "../../components/Loading";
 
 
 interface ContainerProps {
@@ -80,7 +81,9 @@ const Page: React.FC<ContainerProps> = ({}) => {
                 (imageUpload === null) ? (
                     <PlantUploadComponent onImageUpload={onImageUpload} />
                 ) : (
-                    (plantAnalyzationData === null) ? (<>Loading...</>) :
+                    (plantAnalyzationData === null) ? (
+                        <FullScreenLoadingComponent name={undefined} />
+                    ) :
                         (<PlantReportComponent
                             plantImageSrc={getImageUploadSrc(imageUpload)}
                             plantAnalyzationData={plantAnalyzationData}
