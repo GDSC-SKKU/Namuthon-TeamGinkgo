@@ -79,7 +79,7 @@ const PlantReportComponent: React.FC<ContainerProps> = ({plantAnalyzationData, p
             {
                 plantAnalyzationData.disease.map((disease) => {
                     return (
-                        <IonItem>
+                        <IonItem key={disease.name}>
                             <IonLabel color="medium">{disease.name}</IonLabel>
                             <IonNote slot="end">{
                                 (disease.type === "light") ? "초기" :

@@ -1,6 +1,9 @@
 import { defaultBackendUrl } from "./config";
 
 function getApiUrl(path: string) {
+    if (import.meta.env.VITE_API_TESTMODE === 'true') {
+        return `/api_test${path}.json`;
+    }
     const backendUrl = import.meta.env.VITE_BACKEND_URL || defaultBackendUrl;
     return `${backendUrl}${path}`;
 }

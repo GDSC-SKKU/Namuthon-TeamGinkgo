@@ -1,4 +1,5 @@
 import { useIonAlert, IonButton } from "@ionic/react";
+import { useEffect } from "react";
 
 interface ContainerProps {
     onImageUpload: (file: File) => void;
@@ -25,16 +26,12 @@ const PlantUploadComponent: React.FC<ContainerProps> = ({onImageUpload}) => {
         
         // Check if files were selected
         if (inputElement.files && inputElement.files.length > 0) {
-          // Access the selected file(s)
-          const selectedFile = inputElement.files[0];
-          //console.log('Selected file:', selectedFile);
-          onImageUpload(selectedFile);
-      
-          // You can now perform further actions with the selected file
-          // For example, you can upload the file to a server or process it locally.
+            // Access the selected file(s)
+            const selectedFile = inputElement.files[0];
+            onImageUpload(selectedFile);
         }
     }
-
+      
     return (
         <div style={{
             textAlign: "center",
