@@ -5,7 +5,7 @@ function getApiUrl(path: string) {
         return `/api_test${path}.json`;
     }
     const backendUrl = import.meta.env.VITE_BACKEND_URL || defaultBackendUrl;
-    return `${backendUrl}${path}`;
+    return `${backendUrl}${path}/`;
 }
 
 export const backendUrl = {
