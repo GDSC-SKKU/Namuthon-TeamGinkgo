@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar, useIonAlert, useIonRouter } from '@ionic/react';
 import pageDestinations from '../../data/pageDestinations';
 import { interfaceIcons } from '../../data/mediaAssets';
 import './style.css';
@@ -8,7 +8,6 @@ import "firebase/app";
 import { getAuth, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, Auth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import AlreadyLoggedIn from '../../components/guest/AlreadyLoggedIn'
 import { Login, Register } from '../../components/guest/Auth';
-import { Route, Router } from 'react-router';
 
 interface ContainerProps {
     firebaseAuth: Auth;
@@ -18,6 +17,7 @@ interface ContainerProps {
 const Page: React.FC<ContainerProps> = ({firebaseAuth, section}) => {
     
     const router = useIonRouter();
+    const [authStateAlert] = useIonAlert();
 
     function login(email: string, password: string) {
         signInWithEmailAndPassword(firebaseAuth, email, password)
@@ -56,12 +56,17 @@ const Page: React.FC<ContainerProps> = ({firebaseAuth, section}) => {
         });
     }
 
-    function showError(errorMessage: string) {
-        console.error(errorMessage);
+    function showError(errorMessage: string, errorTitle?: string) {
+        authStateAlert({
+            header: 'Error',
+            subHeader: errorTitle,
+            message: errorMessage,
+            buttons: ['OK'],
+        })
     }
 
     function showFirebaseAuthError(errorCode: string, errorMessage: string) {
-        console.error(errorCode, errorMessage);
+        showError( errorMessage.replace("Firebase: ", "") );
     }
     
     return (
