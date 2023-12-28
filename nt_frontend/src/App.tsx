@@ -81,21 +81,25 @@ const App: React.FC = () => {
         (isLoggedIn()) ? (
           <IonTabs>
             <IonRouterOutlet>
+              <Route path="/" exact={true}>
+                <Redirect to={pageDestinations.user.dashboard} />
+              </Route>
 
-              <Route exact path={pageDestinations.user.dashboard}>
+              <Route path={pageDestinations.user.dashboard} exact={true}>
                 <Tab1 />
               </Route>
-              <Route exact path={pageDestinations.user.upload}>
+              <Route path={pageDestinations.user.upload} exact={true}>
                 <UserPlantUploadPage />
               </Route>
-              <Route exact path={pageDestinations.user.history}>
+              <Route path={pageDestinations.user.history} exact={true}>
                 <UserHistoryPage />
               </Route>
               <Route path={pageDestinations.user.account} exact={true}>
                 <UserAccountPage />
               </Route>
-              <Route exact path="/">
-                <Redirect to={pageDestinations.user.dashboard} />
+
+              <Route>
+                <Redirect to={pageDestinations.guest.home} />
               </Route>
             </IonRouterOutlet>
 
@@ -125,6 +129,7 @@ const App: React.FC = () => {
               <Route path="/" exact={true}>
                 <Redirect to={pageDestinations.guest.home} />
               </Route>
+              
               <Route path={pageDestinations.guest.home} exact={true}>
                 <GuestWelcomePage />
               </Route>
@@ -133,6 +138,10 @@ const App: React.FC = () => {
               </Route>
               <Route path={pageDestinations.guest.register} exact={true}>
                 <GuestAuthentication section="register" />
+              </Route>
+
+              <Route>
+                <Redirect to={pageDestinations.guest.home} />
               </Route>
             </IonRouterOutlet>
           </IonSplitPane>
