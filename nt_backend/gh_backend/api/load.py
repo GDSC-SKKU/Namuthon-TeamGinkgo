@@ -11,7 +11,6 @@ def api_render(name, output):
 
 def api_path():
     return [
-        api_render('api/gpt', hello_world),
-        api_render('api/cefr', site_info),
-        api_render('api/session_end', site_info),
+        api_render('api/hello_world', hello_world),
+        api_render('api/site_info', site_info),
     ]
