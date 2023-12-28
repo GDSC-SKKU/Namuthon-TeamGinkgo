@@ -11,7 +11,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, person, square, triangle } from 'ionicons/icons';
+import { cloudUpload, ellipse, home, person, square, triangle } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -48,7 +48,8 @@ import Tab3 from './pages/Tab3';
 import GuestWelcomePage from './pages/guest/Welcome';
 import GuestAuthentication from './pages/guest/Authentication';
 import UserAccountPage from './pages/user/Account';
-import PlantReport from './pages/user/item/PlantReport';
+
+import UserPlantUploadPage from './pages/user/PlantUpload';
 
 setupIonicReact();
 
@@ -84,8 +85,8 @@ const App: React.FC = () => {
               <Route exact path={pageDestinations.user.dashboard}>
                 <Tab1 />
               </Route>
-              <Route exact path="/tab2">
-                <PlantReport />
+              <Route exact path={pageDestinations.user.upload}>
+                <UserPlantUploadPage />
               </Route>
               <Route path="/tab3">
                 <Tab3 />
@@ -100,16 +101,12 @@ const App: React.FC = () => {
 
             <IonTabBar slot="bottom">
               <IonTabButton tab="tab1" href={pageDestinations.user.dashboard}>
-                <IonIcon aria-hidden="true" icon={triangle} />
+                <IonIcon aria-hidden="true" icon={home} />
                 <IonLabel>Dashboard</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="tab2" href="/tab2">
-                <IonIcon aria-hidden="true" icon={ellipse} />
-                <IonLabel>Tab 2</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab3" href="/tab3">
-                <IonIcon aria-hidden="true" icon={square} />
-                <IonLabel>Tab 3</IonLabel>
+              <IonTabButton tab="upload" href={pageDestinations.user.upload}>
+                <IonIcon aria-hidden="true" icon={cloudUpload} />
+                <IonLabel>Upload</IonLabel>
               </IonTabButton>
               <IonTabButton tab="account" href={pageDestinations.user.account}>
                 <IonIcon aria-hidden="true" icon={person} />

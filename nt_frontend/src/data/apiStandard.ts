@@ -1,18 +1,23 @@
-export interface testRequest {
-    user: string;
+import { defaultBackendUrl } from "./config";
+
+function getApiUrl(path: string) {
+    if (import.meta.env.VITE_API_TESTMODE === 'true') {
+        return `/api_test${path}.json`;
+    }
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || defaultBackendUrl;
+    return `${backendUrl}${path}`;
 }
 
-export interface testResponse {
-    isUserAvailable: boolean;
-}
+export const backendUrl = {
+    plantAnalyzation: getApiUrl('/api/analyze_plant')
+};
 
-export interface planetAnalyzationRequest {
+export interface PlanetAnalyzationRequest {
     base64Image: string;
 }
-
-export interface planetAnalyzationResponse {
+export interface PlanetAnalyzationResponse {
     name: string,
-    accuracy:  number,
-    disease: Array<{"name": string, "type": "초기" | "중기" | "말기"}>,
+    accuracy: number,
+    disease: Array<{"name": string, "type": "light" | "warning" | "danger"}>,
     information: {[key: string]: string}
 }

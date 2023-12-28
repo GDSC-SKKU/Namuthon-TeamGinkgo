@@ -7,3 +7,5 @@ export const firebaseConfig = {
     appId: "1:959371424839:web:5838391f6a511c75912d62",
     measurementId: "G-R0F5TFPD1D"
 };
+
+export const defaultBackendUrl = 'http://localhost:8000';
