@@ -1,8 +1,9 @@
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, useIonAlert } from "@ionic/react";
 import { useState } from "react";
+import { PlanetAnalyzationRequest, PlanetAnalyzationResponse, backendUrl } from "../../data/apiStandard";
+import { useUserDataStorage } from "../../data/localStorage";
 import PlantUploadComponent from "../../components/user/plant/Upload";
 import PlantReportComponent from "../../components/user/plant/Report";
-import { PlanetAnalyzationRequest, PlanetAnalyzationResponse, backendUrl } from "../../data/apiStandard";
 import { FullScreenLoadingComponent } from "../../components/Loading";
 
 
@@ -13,6 +14,7 @@ interface ContainerProps {
 const Page: React.FC<ContainerProps> = ({}) => {
     const [imageUpload, setImageUpload] = useState<File | null>(null);
     const [plantAnalyzationData, setAnalyzationData] = useState<PlanetAnalyzationResponse | null>(null);
+    const [plantAnalyzationHistory, setPlantAnalyzationHistory] = useUserDataStorage.plantAnalyzationHistory();
 
     const [fetchStateAlert] = useIonAlert();
 
@@ -23,6 +25,15 @@ const Page: React.FC<ContainerProps> = ({}) => {
     function onImageUpload(file: File) {
         setImageUpload(file);
         requestPlantAnalyzation(file);
+    }
+
+    function onSuccessfulFetch(base64Image: string, data: PlanetAnalyzationResponse) {
+        setAnalyzationData(data);
+        setPlantAnalyzationHistory([...plantAnalyzationHistory, {
+            timestamp: new Date(),
+            base64Image: base64Image,
+            data: data
+        }]);
     }
 
     function requestPlantAnalyzation(file: File) {
@@ -43,7 +54,7 @@ const Page: React.FC<ContainerProps> = ({}) => {
                 body: JSON.stringify(body),
             }).then((response) => {
                 response.json().then((data: PlanetAnalyzationResponse) => {
-                    setAnalyzationData(data);
+                    onSuccessfulFetch(base64Image as string, data);
                 });
             }).catch((error) => {
                 showError(String(error));
@@ -72,9 +83,15 @@ const Page: React.FC<ContainerProps> = ({}) => {
 
     return (<IonPage>
         <IonHeader>
-            <IonToolbar>
-                <IonTitle>{(imageUpload === null) ? ("Upload") : ("Report")}</IonTitle>
-            </IonToolbar>
+            {(imageUpload === null) ? (
+                <IonToolbar>
+                    <IonTitle>Upload</IonTitle>
+                </IonToolbar>
+            ) : (
+                <IonToolbar>
+                    <IonTitle>Report</IonTitle>
+                </IonToolbar>
+            )}
         </IonHeader>
         <IonContent fullscreen>
             {
