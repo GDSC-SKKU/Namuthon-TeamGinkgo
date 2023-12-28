@@ -48,7 +48,7 @@ const Page: React.FC<ContainerProps> = ({section}) => {
             showError("Passwords do not match!");
         }
     }
-
+    
     function showError(errorMessage: string, errorTitle?: string) {
         authStateAlert({
             header: 'Error',

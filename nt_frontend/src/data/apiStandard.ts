@@ -5,3 +5,12 @@ export interface testRequest {
 export interface testResponse {
     isUserAvailable: boolean;
 }
+
+export interface planetAnalyzationRequest {
+    base64Image: string;
+}
+
+export interface platnetAnalyzationResponse {
+    planet: string;
+    confidence: number;
+}

@@ -35,7 +35,6 @@ const Page: React.FC<ContainerProps> = ({}) => {
         <IonHeader>
             <IonToolbar>
                 <IonTitle>Account</IonTitle>
-
                 <IonButtons slot="end">
                     <IonButton onClick={() => {logout()}}>
                         로그아웃
