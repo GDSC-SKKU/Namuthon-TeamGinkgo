@@ -11,39 +11,40 @@ interface ContainerProps {
     plantImageSrc: string;
 }
 
+export function getPlanetHealthStatus(analyzation: PlanetAnalyzationResponse): PlanetHealthStatus {
+    let status: "normal" | "light" | "warning" | "danger" = "normal";
+
+    let light = 0;
+    let warning = 0;
+    let danger = 0;
+    analyzation.disease.forEach((disease) => {
+        switch (disease.type) {
+            case "light":
+                light++;
+                break;
+            case "warning":
+                warning++;
+                break;
+            case "danger":
+                danger++;
+                break;
+        }
+    });
+    if (danger > 0) {
+        status = "danger";
+    }
+    else if (warning > 0) {
+        status = "warning";
+    }
+    else if (light > 0) {
+        status = "light";
+    }
+
+    return { status: status };
+}
+
 const PlantReportComponent: React.FC<ContainerProps> = ({plantAnalyzationData, plantImageSrc}) => {
 
-    function getPlanetHealthStatus(analyzation: PlanetAnalyzationResponse): PlanetHealthStatus {
-        let status: "normal" | "light" | "warning" | "danger" = "normal";
-
-        let light = 0;
-        let warning = 0;
-        let danger = 0;
-        analyzation.disease.forEach((disease) => {
-            switch (disease.type) {
-                case "light":
-                    light++;
-                    break;
-                case "warning":
-                    warning++;
-                    break;
-                case "danger":
-                    danger++;
-                    break;
-            }
-        });
-        if (danger > 0) {
-            status = "danger";
-        }
-        else if (warning > 0) {
-            status = "warning";
-        }
-        else if (light > 0) {
-            status = "light";
-        }
-
-        return { status: status };
-    }
     const planetHealthStatus: PlanetHealthStatus = getPlanetHealthStatus(plantAnalyzationData);
 
     return (<>

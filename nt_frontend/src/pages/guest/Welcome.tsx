@@ -1,8 +1,13 @@
 import { IonButton, IonContent, IonText, IonPage, useIonRouter } from "@ionic/react";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import '@ionic/react/css/ionic-swiper.css';
+
 import { interfaceIcons } from "../../data/mediaAssets";
 import pageDestinations from "../../data/pageDestinations";
 
@@ -36,12 +41,10 @@ const Page: React.FC<ContainerProps> = ({}) => {
     return (<IonPage>
         <IonContent fullscreen>
             <Swiper
-                autoplay={true}
-                keyboard={true}
-                pagination={true}
-                scrollbar={true}
-                zoom={true}
-                slidesPerView={'auto'}
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                navigation={true}
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
                 style={{ height: '100vh' }}
             >
                 <SwiperSlide>

@@ -15,7 +15,6 @@ const Page: React.FC<ContainerProps> = ({}) => {
     const router = useIonRouter();
     
     const [history, setHistory] = useUserDataStorage.plantAnalyzationHistory();
-
     const [currentView, setCurrentView] = useState<{data: PlanetAnalyzationResponse, base64Image: string} | null>(null);
 
     return (<IonPage>

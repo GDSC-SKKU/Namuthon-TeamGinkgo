@@ -42,13 +42,11 @@ import { getAuth, setPersistence, browserSessionPersistence, signInWithCredentia
 
 /* Pages import */
 import pageDestinations from './data/pageDestinations';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
 import GuestWelcomePage from './pages/guest/Welcome';
 import GuestAuthentication from './pages/guest/Authentication';
-import UserAccountPage from './pages/user/Account';
-import UserHistoryPage from './pages/user/History';
+// import UserAccountPage from './pages/user/Account';
+// import UserHistoryPage from './pages/user/History';
+import UserDashboardPage from './pages/user/Dashboard';
 import UserPlantUploadPage from './pages/user/PlantUpload';
 
 setupIonicReact();
@@ -86,17 +84,17 @@ const App: React.FC = () => {
               </Route>
 
               <Route path={pageDestinations.user.dashboard} exact={true}>
-                <Tab1 />
+                <UserDashboardPage />
               </Route>
               <Route path={pageDestinations.user.upload} exact={true}>
                 <UserPlantUploadPage />
               </Route>
-              <Route path={pageDestinations.user.history} exact={true}>
+              {/* <Route path={pageDestinations.user.history} exact={true}>
                 <UserHistoryPage />
               </Route>
               <Route path={pageDestinations.user.account} exact={true}>
                 <UserAccountPage />
-              </Route>
+              </Route> */}
 
               <Route>
                 <Redirect to={pageDestinations.guest.home} />
@@ -112,14 +110,14 @@ const App: React.FC = () => {
                 <IonIcon aria-hidden="true" icon={cloudUpload} />
                 <IonLabel>Upload</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="history" href={pageDestinations.user.history}>
+              {/* <IonTabButton tab="history" href={pageDestinations.user.history}>
                 <IonIcon aria-hidden="true" icon={time} />
                 <IonLabel>History</IonLabel>
               </IonTabButton>
               <IonTabButton tab="account" href={pageDestinations.user.account}>
                 <IonIcon aria-hidden="true" icon={person} />
                 <IonLabel>Account</IonLabel>
-              </IonTabButton>
+              </IonTabButton> */}
             </IonTabBar>
 
           </IonTabs>
@@ -129,7 +127,7 @@ const App: React.FC = () => {
               <Route path="/" exact={true}>
                 <Redirect to={pageDestinations.guest.home} />
               </Route>
-              
+
               <Route path={pageDestinations.guest.home} exact={true}>
                 <GuestWelcomePage />
               </Route>
