@@ -19,8 +19,14 @@ interface SlideImageProps {
     src: string;
 }
 
-const SlideImage: React.FC<SlideImageProps> = ({src}) => {
+const SlideImage1: React.FC<SlideImageProps> = ({src}) => {
     return (<img style={{width: "128px", height: "auto"}} src={src} />);
+}
+const SlideImage2: React.FC<SlideImageProps> = ({src}) => {
+    return (<img style={{width: "194px", height: "auto"}} src={src} />);
+}
+const SlideImage3: React.FC<SlideImageProps> = ({src}) => {
+    return (<img style={{width: "256px", height: "auto"}} src={src} />);
 }
 
 const Page: React.FC<ContainerProps> = ({}) => {
@@ -41,7 +47,7 @@ const Page: React.FC<ContainerProps> = ({}) => {
     const topLeftTextStyle: React.CSSProperties = {
         position: 'absolute',
         top: '16px', // 위에서부터의 간격
-        left: '16px', // 왼쪽에서부터의 간격
+        left: '28px', // 왼쪽에서부터의 간격
         textAlign: 'left', // 텍스트 왼쪽 정렬
         color: 'black', // 텍스트 색상
         // ... 필요한 스타일을 더 추가할 수 있습니다.
@@ -59,9 +65,9 @@ const Page: React.FC<ContainerProps> = ({}) => {
     const TopRightImage: React.FC<TopRightImageProps> = ({ src }) => {
         const imageStyle: React.CSSProperties = {
             position: 'absolute',
-            top: '16px', // 상단으로부터의 간격
-            right: '16px', // 우측으로부터의 간격
-            width: '128px', // 이미지 너비
+            top: '28px', // 상단으로부터의 간격
+            right: '28px', // 우측으로부터의 간격
+            width: '64px', // 이미지 너비
             height: 'auto', // 이미지 높이
         };
     
@@ -94,27 +100,49 @@ const Page: React.FC<ContainerProps> = ({}) => {
                 scrollbar={{ draggable: true }}
                 style={{ height: '100vh' }}
             >
+                <TopRightImage src={"https://i.postimg.cc/K8xTz90n/logo.png"} />
                 <SwiperSlide>
                 <div style={topLeftTextStyle}>
-                    <p>전세계 모든 식물이</p>
+                    <h1>전세계 모든 식물을</h1>
                     <h1>건강하게!</h1>
-                    <p>처음 보는 식물도</p>
-                    <h1>간편하게 진단!</h1>
-                    <h1>믿음직한 AI 진단과</h1>
-                    <h1>솔루션을 해주는 '팝'</h1>
                 </div>
-
-                <TopRightImage src={"https://i.postimg.cc/rFwxJRNW/2.png"} />
                     <section>
-                        <SlideImage src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNHEVMxY_Izw6wR9oirjS6Ek92MngOWS-KQ&usqp=CAU"} />
+                        <SlideImage1 src={"https://i.postimg.cc/1tHcmkQV/a.png"} />
                         <h1>Welcome!</h1>
                         <IonText color="medium">
                             <p>A project by 은행나무</p>
                         </IonText>
                     </section>
                 </SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
+
+                <SwiperSlide>
+                <div style={topLeftTextStyle}>
+                    <h1>처음 보는 식물도</h1>
+                    <h1>간편하게 진단!</h1>
+                </div>
+                <section>
+                    <SlideImage2 src={"https://i.postimg.cc/0NtDhpd7/b.png"} />
+                    <h1>Welcome!</h1>
+                    <IonText color="medium">
+                        <p>A project by 은행나무</p>
+                    </IonText>
+                </section>
+                </SwiperSlide>
+                    
+                <SwiperSlide>
+                <div style={topLeftTextStyle}>
+                    <h1>믿음직한 AI 진단과</h1>
+                    <h1>솔루션을 해주는 '팝'</h1>
+                </div>
+                <section>
+                    <SlideImage3 src={"https://i.postimg.cc/26VhYV2M/c.png"} />
+                    <h1>Welcome!</h1>
+                    <IonText color="medium">
+                        <p>A project by 은행나무</p>
+                    </IonText>
+                </section>
+                </SwiperSlide>
+                
             </Swiper>
             <div style={commonSlideElementStyle}>
                 <IonButton expand="block" size="large" onClick={() => {router.push(pageDestinations.guest.register)}}>Get Started</IonButton>
