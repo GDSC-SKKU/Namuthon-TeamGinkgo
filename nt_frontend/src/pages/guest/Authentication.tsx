@@ -83,7 +83,7 @@ const Page: React.FC<ContainerProps> = ({section}) => {
                         <AlreadyLoggedIn firebaseAuth={firebaseAuth} doLogout={() => {}}/>
                     </div> :
                     <div className="authentication">
-                        <img style={{width: "64px", height: "auto"}} src={interfaceIcons.auth.common} />
+                        <img style={{width: "256px", height: "auto"}} src={interfaceIcons.auth.common} />
                         {
                             (section == 'register') ? (<Register doRegister={register} />) :
                             (section == 'login') ? (<Login doLogin={login} />) : (<></>)

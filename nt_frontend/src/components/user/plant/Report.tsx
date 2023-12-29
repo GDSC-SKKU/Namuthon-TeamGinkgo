@@ -104,7 +104,7 @@ const PlantReportComponent: React.FC<ContainerProps> = ({plantAnalyzationData, p
                     return (
                         <IonItem>
                             <IonLabel>{key}</IonLabel>
-                            <IonNote slot="end">{plantAnalyzationData.information[key]}</IonNote>
+                            <IonNote slot="end" style={{fontSize: "14px"}}>{plantAnalyzationData.information[key]}</IonNote>
                         </IonItem>
                     );
                 })

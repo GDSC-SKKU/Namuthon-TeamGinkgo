@@ -1,6 +1,6 @@
 export const interfaceIcons = {
     auth: {
-        common: "/assets/auth_common.jpg"
+        common: "/assets/icon.png",
     },
     service: {
         dashboard: "/assets/icon/dashboard.png",

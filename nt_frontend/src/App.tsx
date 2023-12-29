@@ -138,9 +138,9 @@ const App: React.FC = () => {
                 <GuestAuthentication section="register" />
               </Route>
 
-              <Route>
+              {/* <Route>
                 <Redirect to={pageDestinations.guest.home} />
-              </Route>
+              </Route> */}
             </IonRouterOutlet>
           </IonSplitPane>
         )

@@ -70,8 +70,9 @@ const Page: React.FC<ContainerProps> = ({}) => {
                         <>
                             {
                                 [0].map((_) => {
-                                    const recentAnalyzation = history[0];
+                                    const recentAnalyzation = history[history.length - 1];
                                     const planetHealthStatus = getPlanetHealthStatus(recentAnalyzation.data);
+                                    console.log(recentAnalyzation);
 
                                     if (planetHealthStatus.status === "danger") {
                                         return (<section style={{textAlign: "center", marginTop: "48px", marginBottom: "24px"}}>
@@ -104,7 +105,7 @@ const Page: React.FC<ContainerProps> = ({}) => {
                             }
                             <IonList inset={true}>
                                 {
-                                    history.map((analyzation, index) => {
+                                    [...history].reverse().map((analyzation, index) => {
                                         return (
                                             <IonItem key={index} button={true} onClick={() => {
                                                 setCurrentView({data: analyzation.data, base64Image: analyzation.base64Image});

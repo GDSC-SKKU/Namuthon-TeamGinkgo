@@ -1,10 +1,11 @@
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, useIonAlert } from "@ionic/react";
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, useIonAlert, IonButton, IonButtons, IonIcon } from "@ionic/react";
 import { useState } from "react";
 import { PlanetAnalyzationRequest, PlanetAnalyzationResponse, backendUrl } from "../../data/apiStandard";
 import { useUserDataStorage } from "../../data/localStorage";
 import PlantUploadComponent from "../../components/user/plant/Upload";
 import PlantReportComponent from "../../components/user/plant/Report";
 import { FullScreenLoadingComponent } from "../../components/Loading";
+import { arrowBack } from "ionicons/icons";
 
 
 interface ContainerProps {
@@ -88,9 +89,25 @@ const Page: React.FC<ContainerProps> = ({}) => {
                     <IonTitle>Upload</IonTitle>
                 </IonToolbar>
             ) : (
-                <IonToolbar>
-                    <IonTitle>Report</IonTitle>
-                </IonToolbar>
+                (plantAnalyzationData === null) ? (
+                    <IonToolbar>
+                        <IonButtons slot="start">
+                            <IonButton onClick={() => {resetState()}}>
+                                <IonIcon slot="icon-only" icon={arrowBack}></IonIcon>
+                            </IonButton>
+                        </IonButtons>
+                        <IonTitle>Loading...</IonTitle>
+                    </IonToolbar>
+                ) : (
+                    <IonToolbar>
+                        <IonButtons slot="start">
+                            <IonButton onClick={() => {resetState()}}>
+                                <IonIcon slot="icon-only" icon={arrowBack}></IonIcon>
+                            </IonButton>
+                        </IonButtons>
+                        <IonTitle>{plantAnalyzationData.name}</IonTitle>
+                    </IonToolbar>
+                )
             )}
         </IonHeader>
         <IonContent fullscreen>
