@@ -15,6 +15,7 @@ from torch.utils.data import Dataset
 import torch.nn.functional as F
 import base64
 from gh_backend.base_dir import BASE_DIR
+from gh_backend.env import MONGODB_CONNECTION_STRING
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -78,7 +79,7 @@ def Return_Disease_Function(base64_input):
     return max_prob, name, disease_name, risk_name
 
 def get_plantdata_from_database(name, disease_name):
-    uri = "mongodb+srv://skku:skku@namuthon-teamginkgo.ql5nn2f.mongodb.net/?retryWrites=true&w=majority"
+    uri = MONGODB_CONNECTION_STRING
     # Create a new client and connect to the server
     client = MongoClient(uri)
 

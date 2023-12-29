@@ -9,3 +9,5 @@ env = environ.Env(
 )
 DEBUG = not bool(env('PRODUCTION', default=False))
 SECRET_KEY = env('SECRET_KEY', default='gh_backend-insecure')
+
+MONGODB_CONNECTION_STRING = env('MONGODB_CONNECTION_STRING', default="mongodb+srv://skku:skku@namuthon-teamginkgo.ql5nn2f.mongodb.net/?retryWrites=true&w=majority")
