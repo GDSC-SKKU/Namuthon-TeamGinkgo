@@ -19,6 +19,14 @@ interface SlideImageProps {
     src: string;
 }
 
+interface TopRightImageProps {
+    src: string;
+}
+
+interface BottomRightImageProps {
+    src: string;
+}
+
 const SlideImage1: React.FC<SlideImageProps> = ({src}) => {
     return (<img style={{width: "128px", height: "auto"}} src={src} />);
 }
