@@ -22,7 +22,7 @@ ionic serve
 
 [초기 셋업] 프로젝트 실행을 위해서는 Django를 비롯하여 각종 모듈이 셋업되어 있어야 합니다.
 ```
-pip install Django django-cors-headers django-environ pytorch torchvision pandas numpy scikit-learn pymongo
+pip install Django django-cors-headers django-environ torch torchvision pandas numpy scikit-learn pymongo
 ```
 
 아래와 같은 명령어로 실행할 수 있습니다.
