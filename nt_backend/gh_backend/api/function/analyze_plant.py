@@ -67,6 +67,9 @@ def Return_Disease_Function(base64_input):
     detection = label_decoder[torch.tensor(torch.argmax(output, dim=1), dtype=torch.int32).detach().numpy()[0]]
     detection = detection.split("_")
     name = crop[detection[0]]
+
+    if detection[1] == "00":
+        return max_prob, name, None, None
     disease_name = disease[detection[0]][detection[1]]
     if detection[2] == 0:
         risk_name = None
@@ -107,6 +110,22 @@ def gh_call(request):
     body = json.loads(body_unicode)
     accuracy, name, disease_name, risk_name = Return_Disease_Function(body["base64Image"])
     information = get_plantdata_from_database(name, disease_name)
+
+    # modify 초기, 중기, 말기 to light, warning, danger
+    if risk_name == "초기":
+        risk_name = "light"
+    elif risk_name == "중기":
+        risk_name = "warning"
+    elif risk_name == "말기":
+        risk_name = "danger"
+
+    if (disease_name == None):
+        return JsonResponse({
+            'name': name,
+            'accuracy': accuracy,
+            'disease': [],
+            'information': {}
+        })
 
     return JsonResponse({
         'name': name,
