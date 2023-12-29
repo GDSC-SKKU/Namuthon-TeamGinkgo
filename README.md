@@ -29,3 +29,7 @@ pip install Django django-cors-headers django-environ torch torchvision pandas n
 ```
 python manage.py runserver
 ```
+
+### 인공지능 모듈
+해당 인공지능 모듈에 대한 파일은 다음 링크에서 확인할 수 있습니다.
+https://drive.google.com/drive/folders/10pEOzgEg_MUbDmHZazRbErF61YSJXfPQ?usp=drive_link
